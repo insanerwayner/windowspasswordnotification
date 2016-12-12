@@ -1,9 +1,10 @@
-# windowspasswordnotification
-This is a login script or Unlock Script(Using Scheduled Task), that checks to see if the password is expiring soon and notifies the user. If the user changes the password it will detect the change, clear the window, lock the computer so they have to type in their new password and the password gets committed to Windows cache.
+# Windows Password Notification
+
+This is a powershell login script or Unlock Script(Using Scheduled Task), that checks to see if the password is expiring soon and notifies the user. If the user changes the password it will detect the change, clear the window, lock the computer so they have to type in their new password and the password gets committed to Windows cache.
 
 Within 14 to 4 days until password expiration it will have a little popup window with instructions on how to change password, but they also have a "Postpone" button that will close the window.
 
-WIthin 3-1 days until password expiration it will FILL The screen with the instructions on how to change the password. They will still have a "Postpone" button
+Within 3-1 days until password expiration it will FILL The screen with the instructions on how to change the password. They will still have a "Postpone" button
 
 On the last day or beyond of password expiration it will again fill the screen but they will not be able to get past the screen until they change their password.
 
