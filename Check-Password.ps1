@@ -58,6 +58,7 @@
     </Grid>
 </Window>
 '@
+
 [xml]$XAMLbig = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -168,7 +169,7 @@ Function Load-XAML ( $days )
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
 		catch{Write-Host "Unable to load Windows.Markup.XamlReader. Some possible causes for this problem include: .NET Framework is missing PowerShell must be launched with PowerShell -sta, invalid XAML code was encountered."; exit}
 		$xaml.SelectNodes("//*[@Name]") | %{Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)}
-		$ExpiredTXT.Text = "Your Windows password expired $daysleft days ago."
+		$ExpiredTXT.Text = "Your Windows password has expired."
 		$SubTXT.Visibility = "Visible"
 		$OkayBTN.Visibility = "Hidden"
 		}
