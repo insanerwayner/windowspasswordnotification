@@ -237,7 +237,7 @@ catch
 #endregion
 
 #region MainFlow
-if ( $timeleft -le 14 )
+if ( $timeleft -le 7 )
 	{
 	Start-Job -ScriptBlock $scriptblock -Name CheckIfChanged
 	Load-XAML -Days $timeleft
