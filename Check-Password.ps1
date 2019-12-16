@@ -166,7 +166,7 @@ Function Load-XAML ( $days )
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
 		catch{Write-Host "Unable to load Windows.Markup.XamlReader. Some possible causes for this problem include: .NET Framework is missing PowerShell must be launched with PowerShell -sta, invalid XAML code was encountered."; exit}
 		$xaml.SelectNodes("//*[@Name]") | %{Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)}
-		$ExpiredTXT.Text = "Your Windows password expires today!"
+		$ExpiredTXT.Text = "Your Windows password expires today."
 		$SubTXT.Visibility = "Visible"
 		$OkayBTN.Visibility = "Hidden"
 		}
