@@ -17,14 +17,7 @@
             <RowDefinition Height="120" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        <Image
-            Grid.Row="0"
-            Height="70"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Source="Logo.png"
-        />
-         <TextBlock Grid.Row="1"
+        <TextBlock Grid.Row="1"
             Name="ExpiredTXT"
             Text="Your Window password wiill expire in 0 days" 
             HorizontalAlignment="Center"
@@ -78,13 +71,6 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Image
-            Grid.Row="0"
-            Height="200"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Source="Logo.png"
-        />
         <TextBlock
 			Grid.Row="1"
             Name="ExpiredTXT"
