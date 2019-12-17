@@ -8,7 +8,7 @@ param(
 [xml]$XAMLsmall = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="360" Width="900"
+        Title="MainWindow" Height="300" Width="900"
 	WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         BorderBrush="#b81237"
@@ -18,9 +18,9 @@ param(
         >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70" />
-            <RowDefinition Height="120" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
             Name="ExpiredTXT"
