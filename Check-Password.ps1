@@ -19,11 +19,10 @@ param(
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
-            <RowDefinition Height="70" />
             <RowDefinition Height="120" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1"
+        <TextBlock Grid.Row="0"
             Name="ExpiredTXT"
             Text="Your Window password wiill expire in 0 days" 
             HorizontalAlignment="Center"
@@ -34,7 +33,7 @@ param(
             FontSize="30"
             Margin="10" 
         />
-        <TextBlock Grid.Row="2"
+        <TextBlock Grid.Row="1"
             Name="InstructionsTXT"
             Text="Please press Ctrl+Alt+Del on your keyboard and select 'Change a Password'"
             HorizontalAlignment="Center"
@@ -45,7 +44,7 @@ param(
             Margin="10" 
         />
         <Button
-            Grid.Row="3"
+            Grid.Row="2"
             Name="OkayBTN" 
             Content=" Postpone " 
             HorizontalAlignment="Center" 
@@ -75,22 +74,21 @@ param(
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock
-			Grid.Row="1"
+	    Grid.Row="0"
             Name="ExpiredTXT"
             Text="" 
             HorizontalAlignment="Center"
             TextAlignment="Center"
             VerticalAlignment="Center"
-			TextWrapping="Wrap"
-			FontWeight="Medium"
+	    TextWrapping="Wrap"
+	    FontWeight="Medium"
             FontSize="80" 
             Margin="10" 
         />
         <TextBlock
-	    Grid.Row="2"
+	    Grid.Row="1"
             Name="InstructionsTXT"
             Text="Please press Ctrl+Alt+Del on your keyboard and select 'Change a Password'"
             HorizontalAlignment="Center"
@@ -101,27 +99,27 @@ param(
             FontSize="70" 
             Margin="10" 
         />
-	    <TextBlock
-		    Grid.Row="3"
-		    Name="SubTXT"
-		    Text="This screen will disappear when you change your password"
-		    HorizontalAlignment="Center"
-		    VerticalAlignment="Center"
-		    TextWrapping="Wrap"
-		    TextAlignment="Center"
-		    FontSize="60"
-		    FontWeight="Light"
-		    Margin="10" 
-	    />
-	    <Button
-	        Grid.Row="3"
-	        Name="OkayBTN" 
-	        Content=" Postpone " 
-	        HorizontalAlignment="Center" 
-	        Margin="58,0,77,14" 
-	        VerticalAlignment="Center" 
-	        BorderThickness="0" 
-	        FontSize="30"
+	<TextBlock
+	    Grid.Row="2"
+	    Name="SubTXT"
+	    Text="This screen will disappear when you change your password"
+	    HorizontalAlignment="Center"
+	    VerticalAlignment="Center"
+	    TextWrapping="Wrap"
+	    TextAlignment="Center"
+	    FontSize="60"
+	    FontWeight="Light"
+	    Margin="10" 
+	/>
+	<Button
+	    Grid.Row="2"
+	    Name="OkayBTN" 
+	    Content=" Postpone " 
+	    HorizontalAlignment="Center" 
+	    Margin="58,0,77,14" 
+	    VerticalAlignment="Center" 
+	    BorderThickness="0" 
+	    FontSize="30"
         />
     </Grid>
 </Window>
