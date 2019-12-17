@@ -144,7 +144,7 @@ Function Load-XAML ( $days )
 	{
 	[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
 	#Read XAML
-	if ( $days -gt $DaysToMaximize )
+	if ( $days -ge $DaysToMaximize )
 		{
 		$XAML = $XAMLsmall
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
