@@ -19,7 +19,6 @@ param(
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70" />
-            <RowDefinition Height="70" />
             <RowDefinition Height="120" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
@@ -75,17 +74,16 @@ param(
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock
-			Grid.Row="1"
+	    Grid.Row="1"
             Name="ExpiredTXT"
             Text="" 
             HorizontalAlignment="Center"
             TextAlignment="Center"
             VerticalAlignment="Center"
-			TextWrapping="Wrap"
-			FontWeight="Medium"
+	    TextWrapping="Wrap"
+	    FontWeight="Medium"
             FontSize="80" 
             Margin="10" 
         />
@@ -101,27 +99,27 @@ param(
             FontSize="70" 
             Margin="10" 
         />
-	    <TextBlock
-		    Grid.Row="3"
-		    Name="SubTXT"
-		    Text="This screen will disappear when you change your password"
-		    HorizontalAlignment="Center"
-		    VerticalAlignment="Center"
-		    TextWrapping="Wrap"
-		    TextAlignment="Center"
-		    FontSize="60"
-		    FontWeight="Light"
-		    Margin="10" 
-	    />
-	    <Button
-	        Grid.Row="3"
-	        Name="OkayBTN" 
-	        Content=" Postpone " 
-	        HorizontalAlignment="Center" 
-	        Margin="58,0,77,14" 
-	        VerticalAlignment="Center" 
-	        BorderThickness="0" 
-	        FontSize="30"
+	<TextBlock
+		Grid.Row="3"
+		Name="SubTXT"
+		Text="This screen will disappear when you change your password"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		TextWrapping="Wrap"
+		TextAlignment="Center"
+		FontSize="60"
+		FontWeight="Light"
+		Margin="10" 
+	/>
+	<Button
+	    Grid.Row="3"
+	    Name="OkayBTN" 
+	    Content=" Postpone " 
+	    HorizontalAlignment="Center" 
+	    Margin="58,0,77,14" 
+	    VerticalAlignment="Center" 
+	    BorderThickness="0" 
+	    FontSize="30"
         />
     </Grid>
 </Window>
