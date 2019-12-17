@@ -21,6 +21,7 @@ param(
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
             Name="ExpiredTXT"
@@ -44,7 +45,7 @@ param(
             Margin="10" 
         />
         <Button
-            Grid.Row="2"
+            Grid.Row="3"
             Name="OkayBTN" 
             Content=" Postpone " 
             HorizontalAlignment="Center" 
