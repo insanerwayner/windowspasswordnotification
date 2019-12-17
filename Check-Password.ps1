@@ -180,7 +180,7 @@ Function Load-XAML ( $days )
 		$InstructionsTXT.FontSize = $InstructionsTXT.FontSize/1.25
 		$SubTXT.FontSize = $SubTXT.FontSize/1.25
 		}
-	$OkayBTN.add_Click({$form.Close()})
+	$OkayBTN.add_Click({$form.Close(); Stop-Job -Name CheckIfChanged})
 	$Form.ShowDialog() | out-null
 	}
 #endregion
