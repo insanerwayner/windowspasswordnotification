@@ -1,3 +1,9 @@
+param(
+    [int]$DaysToStart = 7,
+    [int]$DaysToMaximizeWindow = 3,
+    [int]$DaysToRemovePostpone = 0,
+    [int]$MaxPasswordAge = 90
+    )
 #Region XAML
 [xml]$XAMLsmall = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -138,7 +144,7 @@ Function Load-XAML ( $days )
 	{
 	[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
 	#Read XAML
-	if ( $days -gt 3 )
+	if ( $days -gt $DaysToMaximize )
 		{
 		$XAML = $XAMLsmall
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
@@ -148,7 +154,7 @@ Function Load-XAML ( $days )
 		$ExpiredTXT.Text = "Your Windows password will expire in $timeleft days."
 		$OkayBTN.Visibility = "Visible"
 		}
-	elseif ( $days -gt 0 )
+	elseif ( $days -gt $DaysToRemovePostpone )
 		{
 		$XAML = $XAMLbig
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
@@ -161,7 +167,7 @@ Function Load-XAML ( $days )
 		$OkayBTN.Visibility = "Visible"
 		$OkayBTN.VerticalAlignment = "Bottom"
 		}
-	elseif ( $days -lt 0 )
+	elseif ( $days -lt $DaysToDisablePostpone )
 		{
 		$daysleft = $days*-1
 		$XAML = $XAMLbig
@@ -205,8 +211,8 @@ Function Check-IfChanged
 	$searcher.Filter="(&(samaccountname=$username))"
 	$results=$searcher.findone()
 	$lastset = [datetime]::fromfiletime($results.properties.pwdlastset[0])
-	$timeleft = 90 - ( ( Get-Date ) - $lastset ).days
-	If ( $timeleft -eq 90 )
+	$timeleft = $MaxPasswordAge - ( ( Get-Date ) - $lastset ).days
+	If ( $timeleft -eq $MaxPasswordAge )
 		{
 		rundll32.exe user32.dll,LockWorkStation
 		Get-Process | ? { $_.mainwindowtitle -eq "Check-Password" } | Stop-Process
@@ -226,10 +232,11 @@ try
 	{
 	$username = [Environment]::UserName
 	$searcher=New-Object DirectoryServices.DirectorySearcher
+	# Only Get Users with Passwords set to Expire
 	$searcher.Filter="(&(samaccountname=$username)(!(userAccountControl:1.2.840.113556.1.4.803:=65536)))"
 	$results=$searcher.findone()
 	$lastset = [datetime]::fromfiletime($results.properties.pwdlastset[0])
-	$timeleft = 90 - ( ( Get-Date ) - $lastset ).days
+	$timeleft = $MaxPasswordAge - ( ( Get-Date ) - $lastset ).days
 	}
 catch
 	{
@@ -238,7 +245,7 @@ catch
 #endregion
 
 #region MainFlow
-if ( $timeleft -le 7 )
+if ( $timeleft -le $DaysToStart )
 	{
 	Start-Job -ScriptBlock $scriptblock -Name CheckIfChanged
 	Load-XAML -Days $timeleft
