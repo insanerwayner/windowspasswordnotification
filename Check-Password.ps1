@@ -174,17 +174,53 @@ Function Load-XAML ( $days )
 		$SubTXT.Visibility = "Visible"
 		$OkayBTN.Visibility = "Hidden"
 		}
-	If ( (Get-WmiObject win32_DesktopMonitor).pixelsperxlogicalinch -gt 96 )
-		{
-		$ExpiredTXT.FontSize = $ExpiredTXT.FontSize/1.25
-		$InstructionsTXT.FontSize = $InstructionsTXT.FontSize/1.25
-		$SubTXT.FontSize = $SubTXT.FontSize/1.25
-		}
+	$DPISetting = (Get-ItemProperty 'HKCU:\Control Panel\Desktop\WindowMetrics' -Name AppliedDPI).AppliedDPI
+	switch ($DPISetting)
+	    {     
+	    96  {$FontDivide = 1.00}
+	    120 {$FontDivide = 1.25}
+	    144 {$FontDivide = 1.50}
+	    192 {$FontDivide = 2.00}
+	    }
+	$ExpiredTXT.FontSize = $ExpiredTXT.FontSize/$FontDivide
+	$InstructionsTXT.FontSize = $InstructionsTXT.FontSize/$FontDivide
+	$SubTXT.FontSize = $SubTXT.FontSize/$FontDivide
 	$OkayBTN.add_Click({$form.Close(); Stop-Job -Name CheckIfChanged})
 	$Form.ShowDialog() | out-null
 	}
 #endregion
 
+# Region GetDPISetting
+Function Get-DPISetting
+    {
+    Add-Type @'
+      using System;
+      using System.Runtime.InteropServices;
+      using System.Drawing;
+
+      public class DPI {
+	[DllImport("gdi32.dll")]
+	static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
+	public enum DeviceCap {
+	  VERTRES = 10,
+	  DESKTOPVERTRES = 117
+	}
+
+	public static float scaling() {
+	  Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+	  IntPtr desktop = g.GetHdc();
+	  int LogicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+	  int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+
+	  return (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+	}
+      }
+    '@ -ReferencedAssemblies 'System.Drawing.dll'
+
+    [Math]::round([DPI]::scaling(), 2) * 100
+    }
+#endregion
 #Region CheckIfChanged Scriptblock
 $scriptblock =
 {	
