@@ -144,14 +144,14 @@ Function Load-XAML ( $days )
 	{
 	[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
 	#Read XAML
-	if ( $days -ge $DaysToMaximizeWindow )
+	if ( $days -gt $DaysToMaximizeWindow )
 		{
 		$XAML = $XAMLsmall
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
 		catch{Write-Host "Unable to load Windows.Markup.XamlReader. Some possible causes for this problem include: .NET Framework is missing PowerShell must be launched with PowerShell -sta, invalid XAML code was encountered."; exit}
 		$xaml.SelectNodes("//*[@Name]") | %{Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)}
-		$ExpiredTXT.Text = "Your Windows password will expire in $timeleft days."
+		$ExpiredTXT.Text = "Your Windows password will expire in $days days."
 		$OkayBTN.Visibility = "Visible"
 		}
 	elseif ( $days -gt $DaysToRemovePostpone )
@@ -161,7 +161,7 @@ Function Load-XAML ( $days )
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
 		catch{Write-Host "Unable to load Windows.Markup.XamlReader. Some possible causes for this problem include: .NET Framework is missing PowerShell must be launched with PowerShell -sta, invalid XAML code was encountered."; exit}
 		$xaml.SelectNodes("//*[@Name]") | %{Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name)}
-		$ExpiredTXT.Text = "Your Windows password will expire in $timeleft days."
+		$ExpiredTXT.Text = "Your Windows password will expire in $days days."
 		$SubTXT.Visibility = "Visible"
 		$SubTXT.VerticalAlignment = "Center"
 		$OkayBTN.Visibility = "Visible"
