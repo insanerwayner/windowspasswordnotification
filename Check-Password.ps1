@@ -20,14 +20,14 @@ param(
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
             Name="ExpiredTXT"
             Text="Your Window password wiill expire in 0 days" 
             HorizontalAlignment="Center"
             TextAlignment="Center"
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"
             TextWrapping="Wrap"
             FontWeight="Bold"
             FontSize="30"
@@ -49,7 +49,7 @@ param(
             Content=" Postpone " 
             HorizontalAlignment="Center" 
             Margin="58,0,77,14" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Bottom" 
             BorderThickness="0" 
             FontSize="20"
             />
