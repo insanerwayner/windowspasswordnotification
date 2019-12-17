@@ -37,7 +37,7 @@ param(
             Name="InstructionsTXT"
             Text="Please press Ctrl+Alt+Del on your keyboard and select 'Change a Password'"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             TextWrapping="Wrap"
             TextAlignment="Center"
             FontSize="30" 
