@@ -8,7 +8,7 @@ param(
 [xml]$XAMLsmall = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="300" Width="900"
+        Title="MainWindow" Height="200" Width="900"
 	WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         BorderBrush="#b81237"
@@ -134,6 +134,7 @@ Function Load-XAML
 	#Read XAML
 	if ( $days -gt $DaysToMaximizeWindow )
 		{
+		$Scale = 100
 		$XAML = $XAMLsmall
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
