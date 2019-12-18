@@ -124,8 +124,12 @@ param(
     </Grid>
 </Window>
 '@
-Function Load-XAML ( $days )
+Function Load-XAML 
 	{
+	param(
+	    [int]$Days,
+	    [int]$Scale
+	    )
 	[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
 	#Read XAML
 	if ( $days -gt $DaysToMaximizeWindow )
@@ -174,17 +178,10 @@ Function Load-XAML ( $days )
 		$SubTXT.Visibility = "Visible"
 		$OkayBTN.Visibility = "Hidden"
 		}
-	$DPISetting = (Get-ItemProperty 'HKCU:\Control Panel\Desktop\WindowMetrics' -Name AppliedDPI).AppliedDPI
-	switch ($DPISetting)
-	    {     
-	    96  {$FontDivide = 1.00}
-	    120 {$FontDivide = 1.25}
-	    144 {$FontDivide = 1.50}
-	    192 {$FontDivide = 2.00}
-	    }
+	$FontDivide = $Scale/100
 	$ExpiredTXT.FontSize = $ExpiredTXT.FontSize/$FontDivide
 	$InstructionsTXT.FontSize = $InstructionsTXT.FontSize/$FontDivide
-	$SubTXT.FontSize = $SubTXT.FontSize/$FontDivide
+	if ( $SubTXT ) { $SubTXT.FontSize = $SubTXT.FontSize/$FontDivide }
 	$OkayBTN.add_Click({$form.Close(); Stop-Job -Name CheckIfChanged})
 	$Form.ShowDialog() | out-null
 	}
@@ -218,7 +215,8 @@ Function Get-DPISetting
       }
     '@ -ReferencedAssemblies 'System.Drawing.dll'
 
-    [Math]::round([DPI]::scaling(), 2) * 100
+    $Scale = [Math]::round([DPI]::scaling(), 2) * 100
+    return $Scale
     }
 #endregion
 #Region CheckIfChanged Scriptblock
@@ -267,8 +265,9 @@ catch
 #region MainFlow
 if ( $timeleft -le $DaysToStart )
 	{
+	$Scale = Get-DPISetting
 	Start-Job -ScriptBlock $scriptblock -Name CheckIfChanged
-	Load-XAML -Days $timeleft
+	Load-XAML -Days $timeleft -Scale $Scale
 	}
 else
 	{
