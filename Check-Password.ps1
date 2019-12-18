@@ -134,6 +134,7 @@ Function Load-XAML
 	#Read XAML
 	if ( $days -gt $DaysToMaximizeWindow )
 		{
+		$Scale = 100
 		$XAML = $XAMLsmall
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
