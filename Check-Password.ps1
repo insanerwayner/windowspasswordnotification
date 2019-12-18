@@ -8,7 +8,7 @@ param(
 [xml]$XAMLsmall = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="200" Width="800"
+        Title="Check-Password" Height="200" Width="800"
 	WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         BorderBrush="#b81237"
@@ -233,8 +233,7 @@ Function Check-IfChanged
 	$searcher.Filter="(&(samaccountname=$username))"
 	$results=$searcher.findone()
 	$lastset = [datetime]::fromfiletime($results.properties.pwdlastset[0])
-	$timeleft = $MaxPasswordAge - ( ( Get-Date ) - $lastset ).days
-	If ( $timeleft -eq $MaxPasswordAge )
+	If ( ( Get-Date $lastset -Format MM/dd/yy ) -eq (Get-Date -Format MM/dd/yy) )
 		{
 		rundll32.exe user32.dll,LockWorkStation
 		Get-Process | ? { $_.mainwindowtitle -eq "Check-Password" } | Stop-Process
