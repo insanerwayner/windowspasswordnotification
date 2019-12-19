@@ -275,7 +275,7 @@ catch
 if ( $timeleft -le $DaysToStart )
 	{
 	$Scale = Get-DPISetting
-	Start-Job -InitializationScript $InitializationScript -ScriptBlock { Check-IfChanged -LockScreenOnPasswordChange $args } -Name CheckIfChanged -ArgumentList $LockScreenOnPasswordChange
+	Start-Job -InitializationScript $InitializationScript -ScriptBlock { Check-IfChanged -LockScreenOnPasswordChange $input } -Name CheckIfChanged -InputObject $LockScreenOnPasswordChange
 	Load-XAML -Days $timeleft -Scale $Scale
 	}
 else
