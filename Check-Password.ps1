@@ -2,7 +2,7 @@ param(
     [int]$DaysToStart = 7,
     [int]$DaysToMaximizeWindow = 3,
     [int]$DaysToRemovePostpone = 0,
-    [int]$MaxPasswordAge = 90
+    [int]$MaxPasswordAge = 90,
     [bool]$LockScreenOnPasswordChange = $False
     )
 #Region XAML
