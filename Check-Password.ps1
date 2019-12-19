@@ -3,6 +3,7 @@ param(
     [int]$DaysToMaximizeWindow = 3,
     [int]$DaysToRemovePostpone = 0,
     [int]$MaxPasswordAge = 90
+    [bool]$LockScreenOnPasswordChange = $False
     )
 #Region XAML
 [xml]$XAMLsmall = @'
@@ -224,10 +225,13 @@ Function Get-DPISetting
     }
 #endregion
 #Region CheckIfChanged Scriptblock
-$scriptblock =
+$InitializationScript =
 {	
 Function Check-IfChanged
 	{
+	param(
+	    [bool]$LockScreenOnPasswordChange
+	    )
 	$username = [Environment]::UserName
 	$searcher=New-Object DirectoryServices.DirectorySearcher
 	$searcher.Filter="(&(samaccountname=$username))"
@@ -235,16 +239,18 @@ Function Check-IfChanged
 	$lastset = [datetime]::fromfiletime($results.properties.pwdlastset[0])
 	If ( ( Get-Date $lastset -Format MM/dd/yy ) -eq (Get-Date -Format MM/dd/yy) )
 		{
-		rundll32.exe user32.dll,LockWorkStation
+		if ( $LockScreenOnPasswordChange )
+		    {
+		    rundll32.exe user32.dll,LockWorkStation
+		    }
 		Get-Process | ? { $_.mainwindowtitle -eq "Check-Password" } | Stop-Process
 		}
 	Else
 		{
 		Sleep -Seconds 3
-		Check-IfChanged
+		Check-IfChanged -LockScreenOnPasswordChange $LockScreenOnPasswordChange
 		}
 	}
-Check-IfChanged
 }
 #endregion
 
@@ -269,7 +275,7 @@ catch
 if ( $timeleft -le $DaysToStart )
 	{
 	$Scale = Get-DPISetting
-	Start-Job -ScriptBlock $scriptblock -Name CheckIfChanged
+	Start-Job -InitializationScript $InitializationScript -ScriptBlock { Check-IfChanged -LockScreenOnPasswordChange $args } -Name CheckIfChanged -ArgumentList $LockScreenOnPasswordChange
 	Load-XAML -Days $timeleft -Scale $Scale
 	}
 else
