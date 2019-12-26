@@ -259,10 +259,10 @@ Function Get-PasswordPolicy
     $domainname = $env:userdomain  
     #connect to the $domain 
     [ADSI]$domain = "WinNT://$domainname"
-    $PasswordPolicy = $domain | Select @{Name="Name";Expression={$_.name.value}}, 
-    @{Name="PwdHistory";Expression={$_.PasswordHistoryLength.value}}, 
-    @{Name="MinPasswordAge";Expression={$_.MinPasswordAge.value}}, 
-    @{Name="MaxPasswordAge";Expression={$_.MaxPasswordAge.value}}
+    $PasswordPolicy = $domain | Select @{Name="Name";Expression={$_.name.value}},
+    @{Name="PwdHistory";Expression={$_.PasswordHistoryLength.value}},
+    @{Name="MinPasswordAge";Expression={New-Timespan -seconds $_.MinPasswordAge.value}},
+    @{Name="MaxPasswordAge";Expression={New-Timespan -seconds $_.MaxPasswordAge.value}}
     return $PasswordPolicy
     }
 
@@ -270,7 +270,7 @@ Function Get-PasswordPolicy
 try
 	{
 	$PasswordPolicy = Get-PasswordPolicy
-	$MaxPasswordAge = $PasswordPolicy.MaxPasswordAge
+	$MaxPasswordAge = $PasswordPolicy.MaxPasswordAge.Days
 	$username = [Environment]::UserName
 	$searcher=New-Object DirectoryServices.DirectorySearcher
 	# Only Get Users with Passwords set to Expire
