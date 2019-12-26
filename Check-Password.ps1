@@ -1,6 +1,7 @@
 param(
     [int]$DaysToStart = 7,
     [int]$DaysToMaximizeWindow = 3,
+    [int]$DaysToRemovePostpone = 0,
     [bool]$LockScreenOnPasswordChange = $False
     )
 #Region XAML
@@ -129,7 +130,6 @@ Function Load-XAML
 	    [int]$Days,
 	    [int]$Scale
 	    )
-	$DaysToRemovePostpone = 1
 	[void][System.Reflection.Assembly]::LoadWithPartialName('presentationframework')
 	#Read XAML
 	if ( $days -gt $DaysToMaximizeWindow )
@@ -156,8 +156,9 @@ Function Load-XAML
 		$OkayBTN.Visibility = "Visible"
 		$OkayBTN.VerticalAlignment = "Bottom"
 		}
-	elseif ( $days -lt $DaysToRemovePostpone )
+	elseif ( $days -lt $DaysToDisablePostpone )
 		{
+		$daysleft = $days*-1
 		$XAML = $XAMLbig
 		$reader=(New-Object System.Xml.XmlNodeReader $xaml) 
 		try{$Form=[Windows.Markup.XamlReader]::Load( $reader )}
