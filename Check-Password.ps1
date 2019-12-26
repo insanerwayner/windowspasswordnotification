@@ -2,7 +2,6 @@ param(
     [int]$DaysToStart = 7,
     [int]$DaysToMaximizeWindow = 3,
     [int]$DaysToRemovePostpone = 0,
-    [int]$MaxPasswordAge = 90,
     [bool]$LockScreenOnPasswordChange = $False
     )
 #Region XAML
@@ -254,9 +253,24 @@ Function Check-IfChanged
 }
 #endregion
 
+#Region Get Max Password Age
+Function Get-PasswordPolicy
+    {
+    $domainname = $env:userdomain  
+    #connect to the $domain 
+    [ADSI]$domain = "WinNT://$domainname"
+    $PasswordPolicy = $domain | Select @{Name="Name";Expression={$_.name.value}}, 
+    @{Name="PwdHistory";Expression={$_.PasswordHistoryLength.value}}, 
+    @{Name="MinPasswordAge";Expression={$_.MinPasswordAge.value}}, 
+    @{Name="MaxPasswordAge";Expression={$_.MaxPasswordAge.value}}
+    return $PasswordPolicy
+    }
+
 #Region InitialCheck
 try
 	{
+	$PasswordPolicy = Get-PasswordPolicy
+	$MaxPasswordAge = $PasswordPolicy.MaxPasswordAge
 	$username = [Environment]::UserName
 	$searcher=New-Object DirectoryServices.DirectorySearcher
 	# Only Get Users with Passwords set to Expire
