@@ -1,8 +1,9 @@
 param(
     [int]$DaysToStart = 7,
     [int]$DaysToMaximizeWindow = 3,
-    [bool]$LockScreenOnPasswordChange = $False
+    [Switch]$LockScreenOnPasswordChange
     )
+[bool]$Switch = $LockScreenOnPasswordChange.IsPresent
 #Region XAML
 [xml]$XAMLsmall = @'
 <Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
