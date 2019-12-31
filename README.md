@@ -16,7 +16,7 @@ Check-Password.ps1 [[-DaysToStart] <Int32>] [[-DaysToMaximizeWindow] <Int32>] [-
 
 ### DESCRIPTION
 Displays a notification window for the user indicating that their password is about to or is expired, if within the defined parameters.
-It bases the expiration off of the domain password policy.
+It calculates the days remaining by using the date password was last set with the domain password policy's MaxPasswordAge. 
 The window notification gives instructions to user on how to change their password and gives them the choice to wait for the password change and make the window go away.
 On the last day remaining the choice to postpone will be removed, forcing the user to change the password to remove the window.
 The window will disappear automatically if it detects the user has changed their password.
