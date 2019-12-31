@@ -9,7 +9,7 @@ Check AD user's password expiration status and prompt the user to change if need
 
 ### SYNTAX
 
-```
+```powershell
 Check-Password.ps1 [[-DaysToStart] <Int32>] [[-DaysToMaximizeWindow] <Int32>] [-LockScreenOnPasswordChange]
  [<CommonParameters>]
 ```
