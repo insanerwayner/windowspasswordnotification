@@ -24,7 +24,7 @@ The window will disappear automatically if it detects the user has changed their
 ### EXAMPLES
 
 #### EXAMPLE 1
-```
+```powershell
 Check-Password
 ```
 
@@ -33,7 +33,7 @@ The window will not pop up until the password will expire at a maximum of 7 days
 The window will not maximize to Fullscreen until a maximum of 3 days remaining.
 
 #### EXAMPLE 2
-```
+```powershell
 Check-Password -DaysToStart 4 -DaysToMaximizeWindow 2
 ```
 
@@ -41,7 +41,7 @@ Description: The window will not pop up until the password will expire at a maxi
 The window will not maximize to Fullscreen until a maximum of 2 days remaining.
 
 #### EXAMPLE 3
-```
+```powershell
 Check-Password -DaysToStart 6 -DaysToMaximizeWindow 3 -LockScreenOnPasswordChange
 ```
 
@@ -96,7 +96,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-## Screnshots
+## Screenshots
 
 ### Small Window
 
