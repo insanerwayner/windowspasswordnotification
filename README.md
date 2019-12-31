@@ -29,25 +29,23 @@ Check-Password
 ```
 
 Description: Will run with default values with no parameters specified.
-The window will not pop up until the password will expire at a maximum of 7 days.
-The window will not maximize to Fullscreen until a maximum of 3 days remaining.
+The window will not pop up until password expiration is less than or equal to 7 days remaining. 
+The window will not maximize to Fullscreen until less than or equal to 3 days remaining.
 
 #### EXAMPLE 2
 ```powershell
 Check-Password -DaysToStart 4 -DaysToMaximizeWindow 2
 ```
 
-Description: The window will not pop up until the password will expire at a maximum of 4 days.
-The window will not maximize to Fullscreen until a maximum of 2 days remaining.
+Description: The window will not pop up until password expiration is less than or equal to 4 days remaining. 
+The window will not maximize to Fullscreen until less than or equal to 2 days remaining.
 
 #### EXAMPLE 3
 ```powershell
 Check-Password -DaysToStart 6 -DaysToMaximizeWindow 3 -LockScreenOnPasswordChange
 ```
 
-Description: The window will not pop up until the password will expire at a maximum of 6 days.
-The window will not maximize to Fullscreen until a maximum of 3 days remaining.
-Once the user has changed their password it will lock their workstation, forcing them to sign back in with their newly created password.
+Description: Same as Example 2, however, once the user has changed their password it will lock their workstation, forcing them to sign back in with their newly created password.
 
 ### PARAMETERS
 
