@@ -1,7 +1,7 @@
-param(
+Param(
     [int]$DaysToStart = 7,
     [int]$DaysToMaximizeWindow = 3,
-    [Switch]$LockScreenOnPasswordChange
+    [switch]$LockScreenOnPasswordChange
     )
 [bool]$Switch = $LockScreenOnPasswordChange.IsPresent
 #Region XAML
