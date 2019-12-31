@@ -1,6 +1,6 @@
 # Windows Password Notification
 
-PowerShell login script or Unlock Script(Using Scheduled Task), that checks to see if the password is expiring soon and notifies the user.
+PowerShell script that checks to see if the password is expiring soon and notifies the user by displaying a window.
 
 ## Check-Password.ps1
 
@@ -103,5 +103,4 @@ Accept wildcard characters: False
 ### Full Screen
 
 ![img](FullScreen.png)
-
 
