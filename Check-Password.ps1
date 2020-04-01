@@ -332,7 +332,7 @@ catch
 #endregion
 
 #region MainFlow
-if ( $timeleft -le $DaysToStart )
+if ( ( $timeleft -le $DaysToStart ) -and ( $timeleft -ne $null ) -and ( $timeleft -ne "" ) )
 	{
 	$Scale = Get-DPISetting
 	Start-Job -InitializationScript $InitializationScript -ScriptBlock { Check-IfChanged -LockScreenOnPasswordChange $args[0] } -Name CheckIfChanged -ArgumentList $LockScreenOnPasswordChange
