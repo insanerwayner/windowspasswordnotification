@@ -309,7 +309,7 @@ Function Get-PasswordPolicy
     @{Name="PwdHistory";Expression={$_.PasswordHistoryLength.value}},
     @{Name="MinPasswordAge";Expression={New-Timespan -seconds $_.MinPasswordAge.value}},
     @{Name="MaxPasswordAge";Expression={New-Timespan -seconds $_.MaxPasswordAge.value}}
-    if ( !$PasswordPolicy -or ( $PasswordPolicy -eq $Null) )
+    if ( !$PasswordPolicy.PwdHistory -or !$PasswordPolicy.MinPasswordAge -or !$PasswordPolicy.MaxPasswordAge) )
 	{
 	exit
 	}
@@ -322,6 +322,7 @@ Function Get-PasswordPolicy
 #Region InitialCheck
 try
 	{
+	sleep 5
 	$PasswordPolicy = Get-PasswordPolicy
 	$MaxPasswordAge = $PasswordPolicy.MaxPasswordAge.Days
 	$username = [Environment]::UserName
