@@ -309,7 +309,14 @@ Function Get-PasswordPolicy
     @{Name="PwdHistory";Expression={$_.PasswordHistoryLength.value}},
     @{Name="MinPasswordAge";Expression={New-Timespan -seconds $_.MinPasswordAge.value}},
     @{Name="MaxPasswordAge";Expression={New-Timespan -seconds $_.MaxPasswordAge.value}}
-    return $PasswordPolicy
+    if ( !$PasswordPolicy -or ( $PasswordPolicy -eq $Null) )
+	{
+	exit
+	}
+    else
+	{
+	return $PasswordPolicy
+	}
     }
 
 #Region InitialCheck
