@@ -309,7 +309,7 @@ Function Get-PasswordPolicy
     @{Name="PwdHistory";Expression={$_.PasswordHistoryLength.value}},
     @{Name="MinPasswordAge";Expression={New-Timespan -seconds $_.MinPasswordAge.value}},
     @{Name="MaxPasswordAge";Expression={New-Timespan -seconds $_.MaxPasswordAge.value}}
-    if ( !$PasswordPolicy.PwdHistory -or !$PasswordPolicy.MinPasswordAge -or !$PasswordPolicy.MaxPasswordAge) )
+    if ( !$PasswordPolicy.PwdHistory -or !$PasswordPolicy.MinPasswordAge -or !$PasswordPolicy.MaxPasswordAge )
 	{
 	exit
 	}
